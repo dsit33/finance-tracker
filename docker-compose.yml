@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  # django:
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "8000:8000"
+  #   build: ./core
+
+  flask:
+    # depends_on:
+    #   - django
+    ports:
+      - "5001:5000"
+    build: ./ingestion
+
+volumes:
+  db_data:
