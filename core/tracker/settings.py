@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'users',
+    'accounts',
+    'transactions',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +85,8 @@ DATABASES = {
         'NAME': config("POSTGRES_DB"),
         'USER': config("POSTGRES_USER"),
         'PASSWORD': config("POSTGRES_PASSWORD"),
-        'HOST': config("POSTGRES_HOST"),
-        "PORT": config("POSTGRES_PORT", cast=int)
+        'HOST': config("POSTGRES_HOST", default='db'),
+        "PORT": config("POSTGRES_PORT", cast=int, default=5432)
     }
 }
 
@@ -128,3 +131,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "users.User"
