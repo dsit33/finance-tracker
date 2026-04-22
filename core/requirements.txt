@@ -1,1 +1,4 @@
 django~=4.2.0
+djangorestframework~=3.17.0
+psycopg[binary]~=3.3.0
+python-decouple~=3.8
