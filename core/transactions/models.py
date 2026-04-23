@@ -14,6 +14,6 @@ class Transaction(models.Model):
     def __str__(self):
         return f"${self.date} ${self.merchant} ${self.amount}"
 
-class Meta:
-    indexes = [models.Index(fields=['account', '-date'])]
-    ordering = ['-date']
+    class Meta:
+        indexes = [models.Index(fields=['account', '-date'])]
+        ordering = ['-date']
