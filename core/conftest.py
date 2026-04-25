@@ -45,3 +45,8 @@ def api_client():
 def authed_client(api_client, user):
     api_client.force_authenticate(user=user)
     return api_client
+
+@pytest.fixture
+def internal_client(api_client, settings):
+    api_client.credentials(HTTP_X_INTERNAL_KEY=settings.INTERNAL_API_KEY)
+    return api_client

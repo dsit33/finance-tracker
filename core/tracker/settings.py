@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'accounts',
     'transactions',
+    'internal',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
+
+INTERNAL_API_KEY=config("INTERNAL_API_KEY")

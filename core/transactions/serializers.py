@@ -29,9 +29,3 @@ class TransactionSerializer(serializers.ModelSerializer):
             )
 
         return attrs
-
-    def validate_account(self, account):
-        if account.user.id != self.context['request'].user.id:
-            raise serializers.ValidationError('Invalid account.')
-
-        return account
