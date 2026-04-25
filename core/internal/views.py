@@ -1,4 +1,4 @@
-from transactions.serializers import TransactionSerializer
+from transactions.serializers import TransactionInternalSerializer
 from transactions.models import Transaction
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -22,7 +22,7 @@ def recent(request, account_id):
     cutoff = timezone.localdate() - timedelta(days=days)
 
     qs = Transaction.objects.filter(account=account_id, date__gte=cutoff)
-    serializer = TransactionSerializer(qs, many=True)
+    serializer = TransactionInternalSerializer(qs, many=True)
 
     return Response(serializer.data)
 
@@ -31,7 +31,7 @@ def recent(request, account_id):
 @permission_classes([IsAuthenticated])
 def bulk(request):
     payload = request.data
-    serializer = TransactionSerializer(data=payload, many=True)
+    serializer = TransactionInternalSerializer(data=payload, many=True)
     serializer.is_valid(raise_exception=True)
 
     instances = [Transaction(**d) for d in serializer.validated_data]

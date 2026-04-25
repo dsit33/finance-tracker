@@ -29,3 +29,29 @@ class TransactionSerializer(serializers.ModelSerializer):
             )
 
         return attrs
+
+    def validate_account(self, account):
+        request = self.context['request']
+        if account.user.id != request.user.id:
+            raise serializers.ValidationError('Invalid account.')
+
+        return account
+    
+class TransactionInternalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['account', 'date', 'amount', 'merchant',
+                  'raw_merchant', 'category', 'import_hash', 'created_at']
+        read_only_fields = ['created_at']
+        extra_kwargs = {'import_hash': {'required': False}}
+
+    def validate(self, attrs):
+        if 'import_hash' not in attrs:
+            attrs['import_hash'] = compute_import_hash(   
+                attrs['account'].id,
+                attrs['date'],
+                attrs['amount'],
+                attrs['raw_merchant']
+            )
+
+        return attrs
