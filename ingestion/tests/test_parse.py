@@ -7,8 +7,6 @@ FIXTURES = Path(__file__).parent / 'fixtures'
 def test_parse_chase_csv_returns_canonical_columns():
     df = parse_csv(FIXTURES / 'chase_sample.csv', get_adapter('chase'))
 
-    print(df)
-
     assert 'date' in df.columns
     assert 'raw_merchant' in df.columns
     assert 'amount' in df.columns
@@ -16,8 +14,6 @@ def test_parse_chase_csv_returns_canonical_columns():
 
 def test_parse_boa_csv_returns_canonical_columns():
     df = parse_csv(FIXTURES / 'boa_sample.csv', get_adapter('boa'))
-
-    print(df)
 
     assert 'date' in df.columns
     assert 'raw_merchant' in df.columns
