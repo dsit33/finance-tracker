@@ -22,6 +22,8 @@ services:
     ports:
       - "5001:5000"
     build: ./ingestion
+    volumes:
+      - ./ingestion:/app
     env_file:
       - .env
 

@@ -1,10 +1,15 @@
 from flask import Flask
 
-def create_app():
+from blueprints.health import health_bp
+
+def create_app(config: dict | None = None) -> Flask:
     app = Flask(__name__)
 
-    @app.route('/health')
-    def health_check():
-        return {"ok": True}
-    
+    if config:
+        app.config.update(config)
+
+    app.register_blueprint(health_bp)
+
     return app
+
+app = create_app()
