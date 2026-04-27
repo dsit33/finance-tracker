@@ -7,3 +7,4 @@ pytest-django~=4.9.0
 factory-boy~=3.3.0
 pytest-cov~=6.0.0
 pandas~=2.2.0
+numpy~=2.1.0
