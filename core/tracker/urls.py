@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/transactions/', include('transactions.urls')),
     path('api/internal/', include('internal.urls')),
     path('api/auth/token/', obtain_auth_token),
+    path('api/analytics/', include('analytics.urls')),
 ]
